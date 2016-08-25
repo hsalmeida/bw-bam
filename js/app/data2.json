@@ -1,0 +1,146 @@
+{
+  "idInstance": "CLIENTE_PERF-Cliente",
+  "host": "nthor028",
+  "procRegister": [
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:49:20.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:49:15.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:49:10.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:49:05.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:49:00.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:48:55.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:48:50.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:48:45.0"
+    },
+    {
+      "currentTotalprocess": 17,
+      "currentMemoryProcess": 17,
+      "currentTime": "2016-08-26 16:48:40.0"
+    },
+    {
+      "currentTotalprocess": 46,
+      "currentMemoryProcess": 46,
+      "currentTime": "2016-08-26 16:48:35.0"
+    },
+    {
+      "currentTotalprocess": 46,
+      "currentMemoryProcess": 46,
+      "currentTime": "2016-08-26 16:48:30.0"
+    },
+    {
+      "currentTotalprocess": 66,
+      "currentMemoryProcess": 50,
+      "currentTime": "2016-08-26 16:48:25.0"
+    },
+    {
+      "currentTotalprocess": 56,
+      "currentMemoryProcess": 50,
+      "currentTime": "2016-08-26 16:48:20.0"
+    },
+    {
+      "currentTotalprocess": 48,
+      "currentMemoryProcess": 48,
+      "currentTime": "2016-08-26 16:48:15.0"
+    },
+    {
+      "currentTotalprocess": 40,
+      "currentMemoryProcess": 40,
+      "currentTime": "2016-08-26 16:48:10.0"
+    },
+    {
+      "currentTotalprocess": 69,
+      "currentMemoryProcess": 50,
+      "currentTime": "2016-08-26 16:48:05.0"
+    },
+    {
+      "currentTotalprocess": 58,
+      "currentMemoryProcess": 50,
+      "currentTime": "2016-08-26 16:48:00.0"
+    },
+    {
+      "currentTotalprocess": 49,
+      "currentMemoryProcess": 49,
+      "currentTime": "2016-08-26 16:47:55.0"
+    },
+    {
+      "currentTotalprocess": 39,
+      "currentMemoryProcess": 39,
+      "currentTime": "2016-08-26 16:47:50.0"
+    },
+    {
+      "currentTotalprocess": 70,
+      "currentMemoryProcess": 50,
+      "currentTime": "2016-08-26 16:47:45.0"
+    },
+    {
+      "currentTotalprocess": 59,
+      "currentMemoryProcess": 50,
+      "currentTime": "2016-08-26 16:47:40.0"
+    },
+    {
+      "currentTotalprocess": 60,
+      "currentMemoryProcess": 54,
+      "currentTime": "2016-08-26 16:47:35.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:47:30.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:47:25.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:47:20.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:47:15.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:47:10.0"
+    },
+    {
+      "currentTotalprocess": 0,
+      "currentMemoryProcess": 0,
+      "currentTime": "2016-08-26 16:47:05.0"
+    }
+  ]
+}
