@@ -1,19 +1,99 @@
-var urlServico = "http://10.10.89.180:8080/MonitorBW/MonitorView/2k8rjohmgbw03/SRV-1149-SRV-1149/50";
-var urlArquivo = "js/app/data1.json";
+
 
 $(document).ready(function () {
-    var url = urlServico;
 
+    var urlServico = "";
+    var urlArquivo = "js/app/data1.json";
+    var urlWebServer = "";
+
+    if (typeof(Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+        var host = localStorage.getItem("bwBamLastHost");
+        if(host) {
+            $("#hostSelect").val(host);
+        }
+        var service = localStorage.getItem("bwBamLastService");
+        if(service) {
+            $("#serviceSelect").val(service);
+        }
+        urlWebServer = localStorage.getItem("bwBamUrlWebServer");
+        if(urlWebServer) {
+            urlWebServer = "http://10.10.89.180:8080/MonitorBW/MonitorView/";
+        }
+        urlServico = localStorage.getItem("bwBamLastUrlService");
+        if(urlServico) {
+            urlServico = "http://10.10.89.180:8080/MonitorBW/MonitorView/2k8rjohmgbw03/SRV-1149-SRV-1149";
+        }
+    } else {
+        // Sorry! No Web Storage support..
+        urlWebServer = "http://10.10.89.180:8080/MonitorBW/MonitorView/";
+        urlServico = "http://10.10.89.180:8080/MonitorBW/MonitorView/2k8rjohmgbw03/SRV-1149-SRV-1149";
+    }
+
+    $("#errorMsg").hide();
+
+    $("#webServer").val(urlWebServer);
+
+    var url = urlServico;
     Highcharts.setOptions({
         global: {
             useUTC: false
         }
     });
 
+    createChart(url, 50);
+
+    $(document).on('click', '#btnUpdateChart', function(e){
+        var host = $("#hostSelect").val();
+        var service = $("#serviceSelect").val();
+        var webServer = $("#webServer").val();
+
+        if(service === "arquivo") {
+            createChart(urlArquivo, 0);
+        } else {
+
+            var selecionado = webServer + host + "/" + service;
+
+            if (typeof(Storage) !== "undefined") {
+                // Code for localStorage/sessionStorage.
+                localStorage.setItem("bwBamLastHost", host);
+                localStorage.setItem("bwBamLastService", service);
+                localStorage.setItem("bwBamUrlWebServer", webServer);
+                localStorage.setItem("bwBamLastUrlService", selecionado);
+            }
+
+            createChart(selecionado, 50);
+        }
+
+    });
+
+    $(document).on('click', '.panel-heading span.clickable', function(e){
+        var $this = $(this);
+        if(!$this.hasClass('panel-collapsed')) {
+            $this.parents('.panel').find('.panel-body').slideUp();
+            $this.addClass('panel-collapsed');
+            $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        } else {
+            $this.parents('.panel').find('.panel-body').slideDown();
+            $this.removeClass('panel-collapsed');
+            $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        }
+    })
+
+});
+
+
+function createChart(url, intervalUrlNumber) {
+    $("#errorMsg").hide();
+    if($('#chart-canvas').highcharts()) {
+        $('#chart-canvas').highcharts().destroy();
+        $('#pie-canvas').highcharts().destroy();
+    }
+    waitingDialog.show("Carregando dados iniciais. Aguarde");
     $.ajax({
         url: url,
         success: function (data) {
-            waitingDialog.show("Carregando dados iniciais. Aguarde");
+
             var idInstance = data.idInstance;
             var host = data.host;
 
@@ -52,11 +132,6 @@ $(document).ready(function () {
                 }
                 series[0].data.push([date, procRegister[i].currentTotalprocess]);
                 series[1].data.push([date, procRegister[i].currentMemoryProcess]);
-
-                //var catDate = (date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() +
-                //" " + date.getHours() + "h" + date.getMinutes() + "m" + date.getSeconds() + "s");
-
-                //xcategories.push(date);
             }
 
             var mDate = new Date();
@@ -74,15 +149,16 @@ $(document).ready(function () {
                             var series1 = this.series[0];
                             var chart = this;
                             setInterval(function () {
+                                var urlInterval = intervalUrlNumber === 0 ? url : url + "/" + intervalUrlNumber
                                 $.ajax({
-                                    url: url,
+                                    url: urlInterval,
                                     success: function (data) {
                                         var procRegister = data.procRegister;
                                         procRegister.reverse();
-                                        var seriesData = [];
                                         for (var i = 0; i < procRegister.length; i++) {
                                             var date = new Date(procRegister[i].currentTime).getTime();
                                             if (date > maxDate) {
+                                                var seriesData = [];
                                                 maxDate = date;
 
                                                 var mDate = new Date();
@@ -105,7 +181,7 @@ $(document).ready(function () {
                                     }
                                 });
 
-                            }, 1500);
+                            }, 2000);
                         }
                     }
                 },
@@ -160,6 +236,18 @@ $(document).ready(function () {
                         type: 'minute',
                         text: '10M'
                     }, {
+                        count: 30,
+                        type: 'minute',
+                        text: '30M'
+                    }, {
+                        count: 1,
+                        type: 'hour',
+                        text: '1H'
+                    }, {
+                        count: 1,
+                        type: 'day',
+                        text: '1D'
+                    }, {
                         type: 'all',
                         text: 'All'
                     }],
@@ -176,30 +264,31 @@ $(document).ready(function () {
                             var series2 = this.series[1];
 
                             setInterval(function () {
+                                var urlInterval = intervalUrlNumber === 0 ? url : url + "/" + intervalUrlNumber
                                 $.ajax({
-                                    url: url,
+                                    url: urlInterval,
                                     success: function (data) {
 
                                         var procRegister = data.procRegister;
                                         procRegister.reverse();
+                                        if(series1.options) {
+                                            var last = series1.options.data.length !== 0 ?
+                                                series1.options.data[series1.options.data.length - 1] : undefined;
 
-                                        var last = series1.options.data.length !== 0 ?
-                                            series1.options.data[series1.options.data.length - 1] : undefined;
+                                            for (var i = 0; i < procRegister.length; i++) {
 
-                                        for (var i = 0; i < procRegister.length; i++) {
+                                                var date = new Date(procRegister[i].currentTime).getTime();
 
-                                            var date = new Date(procRegister[i].currentTime).getTime();
+                                                if (last && date > last[0]) {
 
-                                            if (last && date > last[0]) {
+                                                    var y1 = procRegister[i].currentTotalprocess;
+                                                    var y2 = procRegister[i].currentMemoryProcess;
 
-                                                var y1 = procRegister[i].currentTotalprocess;
-                                                var y2 = procRegister[i].currentMemoryProcess;
-
-                                                series1.addPoint([date, y1], true, true);
-                                                series2.addPoint([date, y2], true, true);
+                                                    series1.addPoint([date, y1], true, true);
+                                                    series2.addPoint([date, y2], true, true);
+                                                }
                                             }
                                         }
-
                                     },
                                     error: function (d, msg) {
                                         console.log(d);
@@ -207,12 +296,12 @@ $(document).ready(function () {
                                     }
                                 });
 
-                            }, 1500);
+                            }, 2000);
                         }
                     }
                 },
                 title: {
-                    text: 'Business Activity Monitoring ' + idInstance
+                    text: idInstance
                 },
 
                 subtitle: {
@@ -222,12 +311,12 @@ $(document).ready(function () {
                     min: 0,
                     max: 100,
                     plotLines: [{
-                        value: 50,
+                        value: 75,
                         width: 2,
                         color: 'green',
                         dashStyle: 'shortdash',
                         label: {
-                            text: 'Valor médio'
+                            text: 'Valor médio: 75'
                         }
                     }]
                 },
@@ -238,9 +327,11 @@ $(document).ready(function () {
             });
             waitingDialog.hide();
         },
-        error: function (d, msg) {
-            console.log(d);
-            console.log(msg);
+        error: function (d, msg, errorThrown) {
+            waitingDialog.hide();
+            if(msg === "error") {
+                $("#errorMsg").show();
+            }
         }
     });
-});
+}

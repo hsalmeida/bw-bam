@@ -6,11 +6,12 @@
 <!--[if IE 8]>
 <html lang="pt-BR" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="pt-BR"  class="no-js"> <!--<![endif]-->
+<html lang="pt-BR" class="no-js">
+<!--<![endif]-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <meta name="description" content="">
     <meta name="viewport"
           content="minimal-ui, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
@@ -24,8 +25,95 @@
 <body class="image-cover">
 
 <div class="wrapper">
-    <div id="chart-canvas"></div>
-    <div id="pie-canvas"></div>
+    <div class="bw-bam-header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img
+                            src="img/bw-bam-brand.png"></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse"
+                     id="bs-example-navbar-collapse-1"></div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Services Filter&nbsp;<span class="clickable"><i
+                    class="glyphicon glyphicon-chevron-up"></i></span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-server"></i>&nbsp;Server</span>
+                        <select id="hostSelect" class="form-control">
+                            <option value="2k8rjohmgbw03">2k8rjohmgbw03</option>
+                            <option value="nthor028">nthor028</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-sitemap"></i>&nbsp;Service</span>
+                        <select id="serviceSelect" class="form-control">
+                            <option value="SRV-1149-SRV-1149">SRV-1149-SRV-1149</option>
+                            <option value="CLIENTE_PERF-Cliente">CLIENTE_PERF-Cliente</option>
+                            <option value="arquivo">arquivo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-cloud"></i>&nbsp;App Server</span>
+                        <input type="text" id="webServer" class="form-control"
+                               placeholder="Application Server Host">
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button id="btnUpdateChart" type="button" class="btn btn-success">
+                        <i class="fa fa-cloud-upload"></i>&nbsp;Update Charts
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Business Activity Monitoring</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-6">
+                <div id="chart-canvas"></div>
+            </div>
+            <div class="col-lg-6">
+                <div id="pie-canvas"></div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div id="errorMsg" class="alert alert-danger text-center">
+                <strong>OPS: </strong><span>something very strange is gone
+						on here.</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="js/libs/jquery.js"></script>

@@ -1,9 +1,24 @@
 #chart-canvas {
-    width: 50%;
-    float: left;
+
 }
 
 #pie-canvas {
-    width: 50%;
-    float: left;
+
+}
+
+.bw-bam-header {
+    height: 60px;
+}
+
+.navbar-brand {
+    padding: 0;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
 }
